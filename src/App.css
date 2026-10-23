@@ -624,11 +624,14 @@ a {
 }
 
 .welcome-copy h2 {
-  margin: 17px 0 13px;
-  font-size: clamp(30px, 3.5vw, 43px);
-  font-weight: 800;
-  line-height: 1.18;
+margin: 17px 0 13px;
+color: #ffffff;
+font-family: 'Manrope', sans-serif;
+font-size: clamp(30px, 3.5vw, 43px);
+font-weight: 800;
+line-height: 1.18;
 }
+
 
 .welcome-copy h2 span {
   color: #cdb0ff;
@@ -2469,4 +2472,28 @@ flex-basis: 36px;
 width: 36px;
 height: 36px;
 }
+}
+/* Final readability fixes */
+.welcome-copy h2,
+.welcome-copy h2 span {
+color: #ffffff !important;
+}
+
+.welcome-copy p {
+color: #e2d8ef !important;
+}
+
+.page-heading h2 {
+color: #f5f0ff;
+}
+
+/* Fix overview heading visibility */
+.welcome-copy h2,
+.welcome-copy h2 span {
+color: #ffffff !important;
+-webkit-text-fill-color: #ffffff !important;
+}
+
+.welcome-copy p {
+color: #e2d8ef !important;
 }
