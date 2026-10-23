@@ -340,88 +340,137 @@ function handleSendMessage(event) {
 }
 
   function renderContent() {
-    if (activePage === 'Profile') {
-      const user = session?.user
-      const fullName =
-        user?.user_metadata?.full_name ||
-        user?.email?.split('@')[0] ||
-        'Student'
+if (activePage === 'Profile') {
+  const user = session?.user
 
-      return (
-        <section className="content-panel profile-page">
-         <div className="section-heading">
-  <span className="eyebrow">YOUR PERSONAL SPACE</span>
-  <p>
-    Your account details and your CampusCompanion workspace, all in one place.
-  </p>
-</div>
+  const fullName =
+    user?.user_metadata?.full_name ||
+    user?.email?.split('@')[0] ||
+    'Student'
 
+  return (
+    <section className="content-panel profile-page">
+      <div className="section-heading">
+        <span className="eyebrow">YOUR PERSONAL SPACE</span>
+        <p>
+          Manage your account and keep your academic journey organized.
+        </p>
+      </div>
 
-          <div className="profile-hero-card">
-            <div className="profile-large-avatar">
-              {fullName.charAt(0).toUpperCase()}
-            </div>
+      <div className="profile-hero-card">
+        <div className="profile-large-avatar">
+          {fullName.charAt(0).toUpperCase()}
+        </div>
 
-            <div className="profile-hero-info">
-              <span className="eyebrow">STUDENT ACCOUNT</span>
-              <h3>{fullName}</h3>
-              <p>{user?.email || 'Email unavailable'}</p>
-              <span className="profile-status">
-                <span className="profile-status-dot" />
-                Account signed in
-              </span>
-            </div>
-          </div>
+        <div className="profile-hero-info">
+          <span className="eyebrow">STUDENT ACCOUNT</span>
+          <h3>{fullName}</h3>
+          <p>{user?.email || 'Email unavailable'}</p>
 
-          
-<div className="profile-details-grid">
-  <article className="profile-detail-card">
-    <span className="profile-detail-icon">✦</span>
-    <span className="eyebrow">YOUR WORKSPACE</span>
-    <h3>CampusCompanion AI</h3>
-    <p>
-      Your personal space for study planning, scholarships,
-      and career preparation.
-    </p>
-  </article>
+          <span className="profile-status">
+            <span className="profile-status-dot" />
+            Account active
+          </span>
+        </div>
 
-  <article className="profile-detail-card">
-    <span className="profile-detail-icon">✓</span>
-    <span className="eyebrow">ACCOUNT STATUS</span>
-    <h3>You're all set</h3>
-    <p>
-      You're signed in and ready to continue your student journey.
-    </p>
-  </article>
-</div>
+        <div className="profile-hero-decoration" aria-hidden="true">
+          ✳
+        </div>
+      </div>
 
-          <div className="content-panel profile-security-card">
-            <div>
-              <span className="eyebrow">ACCOUNT SECURITY</span>
-              <h3>Keep your account secure</h3>
-              <p>
-                Always sign out when using a shared or public computer.
-              </p>
-            </div>
+      <div className="profile-section-title">
+        <div>
+          <span className="eyebrow">YOUR CAMPUSCOMPANION</span>
+          <h3>Your student workspace</h3>
+        </div>
+        <span className="profile-section-symbol">✦</span>
+      </div>
 
-            <button
-              className="secondary-button"
-              onClick={async () => {
-                const { error } = await supabase.auth.signOut()
+      <div className="profile-details-grid">
+        <article className="profile-detail-card">
+          <span className="profile-detail-icon">◇</span>
+          <span className="eyebrow">OPPORTUNITIES</span>
+          <h3>{savedOpportunities.length} saved</h3>
+          <p>
+            Keep track of scholarship portals and opportunities you want
+            to explore.
+          </p>
+          <button
+            type="button"
+            className="profile-card-link"
+            onClick={() => setActivePage('Scholarships')}
+          >
+            Explore opportunities <span>→</span>
+          </button>
+        </article>
 
-                if (error) {
-                  alert('Unable to sign out. Please try again.')
-                } else {
-                  setSession(null)
-                }
-              }}
-            >
-              Sign out
-            </button>
-          </div>
-        </section>
-      )
-    }
+        <article className="profile-detail-card">
+          <span className="profile-detail-icon">▦</span>
+          <span className="eyebrow">DAILY PROGRESS</span>
+          <h3>
+            {completedTasks.length} of {tasks.length + customTasks.length}
+          </h3>
+          <p>
+            Review your study tasks and keep moving toward your goals.
+          </p>
+          <button
+            type="button"
+            className="profile-card-link"
+            onClick={() => setActivePage('Study Planner')}
+          >
+            Open study planner <span>→</span>
+          </button>
+        </article>
+
+        <article className="profile-detail-card">
+          <span className="profile-detail-icon">✳</span>
+          <span className="eyebrow">PERSONAL ASSISTANT</span>
+          <h3>One step ahead</h3>
+          <p>
+            Get structured guidance for studying, scholarships, projects,
+            and career preparation.
+          </p>
+          <button
+            type="button"
+            className="profile-card-link"
+            onClick={() => setActivePage('AI Assistant')}
+          >
+            Meet your companion <span>→</span>
+          </button>
+        </article>
+      </div>
+
+      <div className="content-panel profile-security-card">
+        <div className="profile-security-icon">⌑</div>
+
+        <div>
+          <span className="eyebrow">ACCOUNT SECURITY</span>
+          <h3>Keep your account secure</h3>
+          <p>
+            Remember to sign out when using a shared or public computer.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          className="secondary-button"
+          onClick={async () => {
+            const { error } = await supabase.auth.signOut()
+
+            if (error) {
+              alert('Unable to sign out. Please try again.')
+            } else {
+              setSession(null)
+            }
+          }}
+        >
+          Sign out ↗
+        </button>
+      </div>
+    </section>
+  )
+}
+
 
 
     if (activePage === 'AI Assistant') {
