@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Auth from './Auth'
+import { supabase } from './supabaseClient'
+
 
 const scholarshipOpportunities = [
   {
@@ -65,7 +68,11 @@ const scholarshipOpportunities = [
 ]
 
 function App() {
-  const [activePage, setActivePage] = useState('Overview')
+const [session, setSession] = useState(null)
+const [authLoading, setAuthLoading] = useState(true)
+
+const [activePage, setActivePage] = useState('Overview')
+
   const [message, setMessage] = useState('')
   const [chatMessages, setChatMessages] = useState([])
 const [completedTasks, setCompletedTasks] = useState(() => {
@@ -102,6 +109,7 @@ const [savedOpportunities, setSavedOpportunities] = useState(() => {
     { name: 'AI Assistant', icon: '✳' },
     { name: 'Scholarships', icon: '◇' },
     { name: 'Study Planner', icon: '▦' },
+    { name: 'Profile', icon: '◎' },
   ]
 
   const tasks = [
@@ -121,6 +129,47 @@ const [savedOpportunities, setSavedOpportunities] = useState(() => {
       time: '20 minutes',
     },
   ]
+
+useEffect(() => {
+let mounted = true
+
+const initializeAuth = async () => {
+try {
+const { data, error } = await supabase.auth.getSession();
+
+
+if (!mounted) return;
+
+if (error) {
+  console.error('Unable to restore session:', error.message);
+}
+
+setSession(data?.session ?? null);
+
+
+} catch (error) {
+console.error('Unable to initialize authentication:', error);
+if (mounted) setSession(null);
+} finally {
+if (mounted) setAuthLoading(false);
+}
+};
+
+
+initializeAuth()
+
+const {
+data: { subscription },
+} = supabase.auth.onAuthStateChange((_event, newSession) => {
+setSession(newSession)
+setAuthLoading(false)
+})
+
+return () => {
+mounted = false
+subscription.unsubscribe()
+}
+}, [])
 
 useEffect(() => {
   localStorage.setItem(
@@ -288,17 +337,99 @@ function handleSendMessage(event) {
 }
 
   function renderContent() {
+    if (activePage === 'Profile') {
+      const user = session?.user
+      const fullName =
+        user?.user_metadata?.full_name ||
+        user?.email?.split('@')[0] ||
+        'Student'
+
+      return (
+        <section className="content-panel profile-page">
+         <div className="section-heading">
+  <span className="eyebrow">YOUR PERSONAL SPACE</span>
+  <p>
+    Your account details and your CampusCompanion workspace, all in one place.
+  </p>
+</div>
+
+
+          <div className="profile-hero-card">
+            <div className="profile-large-avatar">
+              {fullName.charAt(0).toUpperCase()}
+            </div>
+
+            <div className="profile-hero-info">
+              <span className="eyebrow">STUDENT ACCOUNT</span>
+              <h3>{fullName}</h3>
+              <p>{user?.email || 'Email unavailable'}</p>
+              <span className="profile-status">
+                <span className="profile-status-dot" />
+                Account signed in
+              </span>
+            </div>
+          </div>
+
+          
+<div className="profile-details-grid">
+  <article className="profile-detail-card">
+    <span className="profile-detail-icon">✦</span>
+    <span className="eyebrow">YOUR WORKSPACE</span>
+    <h3>CampusCompanion AI</h3>
+    <p>
+      Your personal space for study planning, scholarships,
+      and career preparation.
+    </p>
+  </article>
+
+  <article className="profile-detail-card">
+    <span className="profile-detail-icon">✓</span>
+    <span className="eyebrow">ACCOUNT STATUS</span>
+    <h3>You're all set</h3>
+    <p>
+      You're signed in and ready to continue your student journey.
+    </p>
+  </article>
+</div>
+
+          <div className="content-panel profile-security-card">
+            <div>
+              <span className="eyebrow">ACCOUNT SECURITY</span>
+              <h3>Keep your account secure</h3>
+              <p>
+                Always sign out when using a shared or public computer.
+              </p>
+            </div>
+
+            <button
+              className="secondary-button"
+              onClick={async () => {
+                const { error } = await supabase.auth.signOut()
+
+                if (error) {
+                  alert('Unable to sign out. Please try again.')
+                } else {
+                  setSession(null)
+                }
+              }}
+            >
+              Sign out
+            </button>
+          </div>
+        </section>
+      )
+    }
+
+
     if (activePage === 'AI Assistant') {
       return (
         <section className="content-panel assistant-panel">
           <div className="section-heading">
-            <span className="eyebrow">YOUR PERSONAL STUDENT GUIDE</span>
-            <h2>What can I help you with?</h2>
-            <p>
-              Explore opportunities, organize your studies, and plan
-              your next move.
-            </p>
-          </div>
+  <span className="eyebrow">YOUR PERSONAL SPACE</span>
+  <p>
+    Your account details and your CampusCompanion workspace, all in one place.
+  </p>
+</div>
           
                     {chatMessages.map((chat, index) => (
             <div
@@ -711,8 +842,21 @@ function handleSendMessage(event) {
     )
   }
 
-  return (
-    <div className="app-shell">
+if (authLoading) {
+return (
+   <div className="auth-loading"> 
+   <p>Preparing your CampusCompanion workspace...</p> 
+   </div>
+)
+}
+
+if (!session) {
+return <Auth onAuthenticated={(newSession) => setSession(newSession)} />
+}
+
+return (
+   <div className="app-shell">
+
       <aside className="sidebar">
         <div className="brand">
           <div className="brand-mark">S<span>✳</span></div>
@@ -744,14 +888,36 @@ function handleSendMessage(event) {
             <p>Your future is built one small step at a time.</p>
           </div>
 
-          <div className="profile-mini">
-            <div className="profile-avatar">S</div>
-            <div>
-              <strong>Sohini</strong>
-              <small>Student workspace</small>
-            </div>
-            <span className="profile-menu">···</span>
-          </div>
+          
+<button
+  type="button"
+  className="profile-mini"
+  onClick={() => setActivePage('Profile')}
+  aria-label="Open your profile"
+>
+  <div className="profile-avatar">
+    {(
+      session?.user?.user_metadata?.full_name ||
+      session?.user?.email?.split('@')[0] ||
+      'S'
+    )
+      .charAt(0)
+      .toUpperCase()}
+  </div>
+
+  <div>
+    <strong>
+      {session?.user?.user_metadata?.full_name ||
+        session?.user?.email?.split('@')[0] ||
+        'Student'}
+    </strong>
+    <small>View your profile</small>
+  </div>
+
+  <span className="profile-menu">→</span>
+</button>
+
+
         </div>
       </aside>
 
@@ -763,10 +929,39 @@ function handleSendMessage(event) {
             <strong>{activePage}</strong>
           </div>
           <div className="topbar-right">
-            <span className="status-dot" />
-            <span>YOUR JOURNEY STARTS HERE</span>
-            <div className="topbar-avatar">S</div>
-          </div>
+  <span className="status-dot" />
+  <span>YOUR JOURNEY STARTS HERE</span>
+
+  <div className="topbar-avatar">
+    {(
+  session?.user?.user_metadata?.full_name ||
+  session?.user?.email ||
+  'S'
+).charAt(0).toUpperCase()}
+  </div>
+
+<button
+type="button"
+className="sign-out-button"
+onClick={async () => {
+const { error } = await supabase.auth.signOut()
+
+
+  if (error) {
+    console.error('Sign out failed:', error.message)
+  }
+}}
+
+
+>
+
+
+Sign Out
+
+
+  </button>
+</div>
+
         </header>
 
         <div className="page-content">
@@ -775,8 +970,11 @@ function handleSendMessage(event) {
               <span className="eyebrow">WELCOME TO YOUR SPACE</span>
               <h2>
                 {activePage === 'Overview'
-                  ? 'Hello, Sohini'
-                  : activePage}
+  ? `Hello, ${session?.user?.user_metadata?.full_name ||
+      session?.user?.email?.split('@')[0] ||
+      'Student'}`
+
+  : activePage}
                 <span className="heading-sparkle"> ✳</span>
               </h2>
               <p>
