@@ -196,26 +196,29 @@ useEffect(() => {
   const text = userMessage.toLowerCase()
 
   if (
-    text.includes('scholarship') ||
-    text.includes('funding') ||
-    text.includes('financial aid')
-  ) {
-    return {
-      tool: 'scholarship_guidance',
-      text:
-        'SCHOLARSHIP GUIDANCE\n\n' +
-        'Start by checking these details for each opportunity:\n' +
-        '• Eligible course and year of study\n' +
-        '• Family income requirements\n' +
-        '• Academic eligibility\n' +
-        '• Application deadline\n' +
-        '• Required documents\n\n' +
-        'You can investigate official scholarship portals and ' +
-        'your college scholarship office. I do not have live ' +
-        'scholarship listings connected yet, so verify current ' +
-        'opportunities and deadlines with their official providers.',
-    }
-  }
+text.includes('scholarship') ||
+text.includes('funding') ||
+text.includes('financial aid')
+) {
+return {
+tool: 'scholarship_guidance',
+text:
+'🎓 SCHOLARSHIP FINDER\n\n' +
+'Let’s help you identify the right scholarship. Start with this checklist:\n\n' +
+'📚 ACADEMIC DETAILS\n' +
+'• Your course, degree, and current semester\n' +
+'• Your latest CGPA or percentage\n\n' +
+'💰 FINANCIAL ELIGIBILITY\n' +
+'• Family income requirements\n' +
+'• Category or domicile criteria, if applicable\n\n' +
+'📄 BEFORE YOU APPLY\n' +
+'• Application deadline\n' +
+'• Aadhaar, income certificate, marksheets, and other required documents\n\n' +
+'🔎 WHERE TO SEARCH\n' +
+'Check the National Scholarship Portal, your state scholarship portal, and your college scholarship office.\n\n' +
+'⚠️ I do not have live scholarship listings connected yet. Verify eligibility, deadlines, and required documents through the official provider before applying.',
+}
+}
 
   if (
     text.includes('study plan') ||
