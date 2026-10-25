@@ -48,10 +48,7 @@ Explore the CampusCompanion AI interface and its student-support features.
 
 ![Career Preparation](screenshots/career-preparation.png)
 
-
-
-
-
+---
 
 ## 📌 Table of Contents
 
@@ -81,13 +78,15 @@ Students often need to navigate multiple websites and tools to:
 
 * 🔎 Discover scholarships and education-support opportunities.
 * 📚 Organize study tasks and revision schedules.
-* 💼 Explore internships and career preparation resources.
+* 💼 Explore internships and career-preparation resources.
 * 🧭 Decide which learning or career step to take next.
 * 📌 Keep useful opportunities organized for future reference.
 
 When these activities are scattered across different platforms, staying organized becomes another challenge.
 
 **Students need a clearer starting point—not another complicated system.**
+
+---
 
 ## 🚀 Our Solution
 
@@ -97,13 +96,13 @@ It combines scholarship discovery links, a guided student assistant, study plann
 
 Instead of trying to replace official education portals, CampusCompanion AI helps students discover relevant resources, organize their next steps, and know where to continue their research.
 
-### 🎯 Built around three principles
+### 🎯 Built Around Three Principles
 
-| Principle       | What it means                                                   |
+| Principle       | What It Means                                                   |
 | --------------- | --------------------------------------------------------------- |
-| **Discover** 🔎 | Explore scholarship portals and educational opportunities.      |
-| **Organize** 📅 | Save interesting opportunities and manage study tasks.          |
-| **Prepare** 🚀  | Access structured guidance for learning, projects, and careers. |
+| 🔎 **Discover** | Explore scholarship portals and educational opportunities.      |
+| 📅 **Organize** | Save interesting opportunities and manage study tasks.          |
+| 🚀 **Prepare**  | Access structured guidance for learning, projects, and careers. |
 
 ---
 
@@ -149,7 +148,7 @@ Use the planner to bring your next academic tasks into focus.
 
 ### 💼 4. Career Preparation
 
-Explore practical suggestions for developing your technical skills and preparing for opportunities.
+Explore practical suggestions for developing technical skills and preparing for opportunities.
 
 Topics include:
 
@@ -176,13 +175,13 @@ A unified interface designed to make the platform easier to navigate.
 
 CampusCompanion AI focuses on the everyday tasks that connect education, planning, and career preparation.
 
-| Challenge                                           | CampusCompanion AI approach                           |
-| --------------------------------------------------- | ----------------------------------------------------- |
-| Useful resources are scattered                      | Bring discovery links into one interface.             |
-| Interesting opportunities are easy to lose track of | Save and revisit selected listings.                   |
-| Study tasks can feel overwhelming                   | Organize academic activities into manageable tasks.   |
-| Career preparation can be difficult to navigate     | Offer structured suggestions and starting points.     |
-| Automated guidance can be misunderstood             | Clearly distinguish rule-based guidance from live AI. |
+| Challenge                                            | CampusCompanion AI Approach                           |
+| ---------------------------------------------------- | ----------------------------------------------------- |
+| Useful resources are scattered.                      | Bring discovery links into one interface.             |
+| Interesting opportunities are easy to lose track of. | Save and revisit selected listings.                   |
+| Study tasks can feel overwhelming.                   | Organize academic activities into manageable tasks.   |
+| Career preparation can be difficult to navigate.     | Offer structured suggestions and starting points.     |
+| Automated guidance can be misunderstood.             | Clearly distinguish rule-based guidance from live AI. |
 
 **The goal is not to make decisions for students. It is to help them explore options and organize their own next steps.**
 
@@ -212,13 +211,21 @@ CampusCompanion AI is built using a modern JavaScript web-development workflow.
 The typical student journey looks like this:
 
 **Open the dashboard**
+
 ↓
+
 **Choose a student-support activity**
+
 ↓
+
 **Explore guidance, scholarship resources, or study tasks**
+
 ↓
+
 **Save relevant opportunities and organize next steps**
+
 ↓
+
 **Continue research through official providers and external resources**
 
 This workflow keeps discovery and organization connected while leaving important decisions and eligibility verification with the student and the relevant provider.
@@ -243,25 +250,25 @@ node --version
 npm --version
 ```
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/ballsohini939-alt/campuscompanion-ai.git
 ```
 
-### 2. Enter the project directory
+### 2. Enter the Project Directory
 
 ```bash
 cd campuscompanion-ai
 ```
 
-### 3. Install dependencies
+### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 4. Start the development server
+### 4. Start the Development Server
 
 ```bash
 npm run dev
@@ -275,7 +282,7 @@ http://localhost:5173/
 
 If that port is already in use, Vite may select another available port.
 
-### 5. Explore the application
+### 5. Explore the Application
 
 Navigate through the available dashboard sections and try the implemented interactions.
 
@@ -308,14 +315,20 @@ The application is organized as a React/Vite project.
 ```text
 campuscompanion-ai/
 ├── public/                 # Public static assets, if present
+├── screenshots/            # Application screenshots
+│   ├── dashboard.png
+│   ├── scholarship-discovery.png
+│   ├── student-assistant.png
+│   ├── study-planning.png
+│   └── career-preparation.png
 ├── src/
-│   ├── App.jsx             # Main React application
-│   └── App.css             # Application styling
-├── index.html              # HTML entry point
-├── package.json            # Dependencies and npm scripts
-├── package-lock.json       # Locked dependency versions
-├── vite.config.js          # Vite configuration, if present
-└── README.md               # Project documentation
+│   ├── App.jsx              # Main React application
+│   └── App.css              # Application styling
+├── index.html               # HTML entry point
+├── package.json             # Dependencies and npm scripts
+├── package-lock.json        # Locked dependency versions
+├── vite.config.js           # Vite configuration, if present
+└── README.md                # Project documentation
 ```
 
 *This is a simplified overview. Exact files and directories may vary with the current repository version.*
@@ -380,7 +393,7 @@ Potential contributions include:
 * Adding automated tests.
 * Suggesting useful student-support workflows.
 
-### Suggested contribution workflow
+### Suggested Contribution Workflow
 
 1. Fork the repository.
 2. Create a branch for your change.
@@ -414,39 +427,10 @@ Built as a practical web-development project, it represents an ongoing effort to
 
 <div align="center">
 
-### 🎓 Built for students. Designed for possibilities.
+### 🎓 Built for Students. Designed for Possibilities.
 
 **Explore. Organize. Prepare.**
 
 [🌐 Open the Live Demo](https://campuscompanion-ai.vercel.app/)
 
 </div>
-
-
----
-
----
-
-## 🖥️ Application Screenshots
-
-Explore the CampusCompanion AI interface and its student-support features.
-
-### 🏠 Main Dashboard
-
-![CampusCompanion AI Main Dashboard](screenshots/dashboard.png)
-
-### 🎓 Scholarship Discovery
-
-![Scholarship Discovery](screenshots/scholarship-discovery.png)
-
-### 🤖 Student Guidance Assistant
-
-![Student Guidance Assistant](screenshots/student-assistant.png)
-
-### 📚 Study Planning
-
-![Study Planning](screenshots/study-planning.png)
-
-### 💼 Career Preparation
-
-![Career Preparation](screenshots/career-preparation.png)
