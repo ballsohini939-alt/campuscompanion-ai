@@ -24,6 +24,35 @@ CampusCompanion AI brings study planning, scholarship discovery, career guidance
 
 ---
 
+## 🖥️ Application Screenshots
+
+Explore the CampusCompanion AI interface and its student-support features.
+
+### 🏠 Main Dashboard
+
+![CampusCompanion AI Main Dashboard](screenshots/dashboard.png)
+
+### 🎓 Scholarship Discovery
+
+![Scholarship Discovery](screenshots/scholarship-discovery.png)
+
+### 🤖 Student Guidance Assistant
+
+![Student Guidance Assistant](screenshots/student-assistant.png)
+
+### 📚 Study Planning
+
+![Study Planning](screenshots/study-planning.png)
+
+### 💼 Career Preparation
+
+![Career Preparation](screenshots/career-preparation.png)
+
+
+
+
+
+
 ## 📌 Table of Contents
 
 * [The Problem](#-the-problem)
